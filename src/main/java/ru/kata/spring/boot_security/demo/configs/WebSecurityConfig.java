@@ -18,6 +18,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final UserServiceImpl userService;
 
+    // SuccessHandler это обработчик успешной аутентификации
+    // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
+
     public WebSecurityConfig(SuccessUserHandler successUserHandler, UserServiceImpl userService) {
         this.successUserHandler = successUserHandler;
         this.userService = userService;
@@ -26,17 +29,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().disable()//  защита от CSRF-атак(вроде подставного сайта где злоумышленник его использует и заставляет
+                // от имени пользователя отправлять пароли, деньги со счёта на счёт и т.п
                 .authorizeRequests()
-                .antMatchers("/", "/login/**").permitAll()
-                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/", "/login/**").permitAll() //авторизацуем запрос
+                .antMatchers("/user").hasAnyRole("ADMIN", "USER") //прописываем доступ для юрл /user/**
+                .antMatchers("/admin").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
+                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
                 .and()
-                .formLogin().successHandler(successUserHandler).permitAll()
+                .formLogin().successHandler(successUserHandler).permitAll() // задаю форму для ввода логина-пароля, по дефолту это "/login" // доступно всем
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/login") // настройка логаута
                 .and()
                 .httpBasic();
     }
