@@ -18,10 +18,9 @@ function getAllUsers() {
                   <tr>
                         <td>${user.id}</td>
                         <td>${user.name}</td>
-                        <td>${user.surname}</td>
+                        <td>${user.lastname}</td>
                         <td>${user.age}</td>
                         <td>${user.email}</td>
-                        <td>${user.salary}</td>
                         <td>${user.username}</td>
                         <td>${user.roles.map(role => role.name === 'ROLE_USER' ? ' USER' : ' ADMIN')}</td>
                   <td>
@@ -50,10 +49,9 @@ function refreshTable() {
 
 ///////////ADD user/////////////////////
 const addName = document.getElementById('name1')
-const addSurname = document.getElementById('surname1')
+const addLastname = document.getElementById('lastname1')
 const addAge = document.getElementById('age1')
 const addEmail = document.getElementById('email1')
-const addSalary = document.getElementById('salary1')
 const addPassword = document.getElementById('password1')
 const addUsername = document.getElementById('username1')
 const addRoles = document.getElementById('roles1')
@@ -96,10 +94,9 @@ addUserForm.addEventListener('submit', (e) => {
         },
         body: JSON.stringify({
             name: addName.value,
-            surname: addSurname.value,
+            lastname: addLastname.value,
             age: addAge.value,
             email: addEmail.value,
-            salary: addSalary.value,
             username: addUsername.value,
             password: addPassword.value,
             roles: [
@@ -126,11 +123,10 @@ on(document, 'click', '#edit-user', e => {
     const userInfo = e.target.parentNode.parentNode
     document.querySelector('#id2').value = userInfo.children[0].innerHTML
     document.getElementById('name2').value = userInfo.children[1].innerHTML
-    document.getElementById('surname2').value = userInfo.children[2].innerHTML
+    document.getElementById('lastname2').value = userInfo.children[2].innerHTML
     document.getElementById('age2').value = userInfo.children[3].innerHTML
     document.getElementById('email2').value = userInfo.children[4].innerHTML
-    document.getElementById('salary2').value = userInfo.children[5].innerHTML
-    document.getElementById('username2').value = userInfo.children[6].innerHTML
+    document.getElementById('username2').value = userInfo.children[5].innerHTML
     document.getElementById('password2').value = userInfo.children[7].innerHTML
     document.getElementById('roles2').value = userInfo.children[8].innerHTML
     $("#modalEdit").modal("show")
@@ -169,10 +165,9 @@ editUserForm.addEventListener('submit', (e) => {
         body: JSON.stringify({
             id: document.getElementById('id2').value,
             name: document.getElementById('name2').value,
-            surname: document.getElementById('surname2').value,
+            lastname: document.getElementById('lastname2').value,
             age: document.getElementById('age2').value,
             email: document.getElementById("email2").value,
-            salary: document.getElementById("salary2").value,
             username: document.getElementById("username2").value,
             password: document.getElementById('password2').value,
             roles: [
@@ -207,11 +202,10 @@ on(document, 'click', '#delete-user', e => {
 
     document.getElementById('id3').value = fila2.children[0].innerHTML
     document.getElementById('name3').value = fila2.children[1].innerHTML
-    document.getElementById('surname3').value = fila2.children[2].innerHTML
+    document.getElementById('lastname3').value = fila2.children[2].innerHTML
     document.getElementById('age3').value = fila2.children[3].innerHTML
     document.getElementById('email3').value = fila2.children[4].innerHTML
-    document.getElementById('salary3').value = fila2.children[4].innerHTML
     document.getElementById('username3').value = fila2.children[4].innerHTML
-    document.getElementById('roles3').value = fila2.children[5].innerHTML
+    document.getElementById('roles3').value = fila2.children[6].innerHTML
     $("#modalDelete").modal("show")
 })
