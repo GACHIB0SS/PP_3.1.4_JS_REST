@@ -33,8 +33,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    private String passwordConfirm;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinTable(name = "roles_users",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -85,8 +84,6 @@ public class User implements UserDetails {
                 this.getUsername() +
                 ", password=" +
                 this.getPassword() +
-                ", passwordConfirm=" +
-                this.getPasswordConfirm() +
                 ", roles=" +
                 this.getRoles() +
                 ")";
@@ -120,9 +117,6 @@ public class User implements UserDetails {
         return this.password;
     }
 
-    public String getPasswordConfirm() {
-        return this.passwordConfirm;
-    }
 
     public Set<Role> getRoles() {
         return this.roles;
@@ -156,13 +150,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 
 
 }
