@@ -206,6 +206,6 @@ on(document, 'click', '#delete-user', e => {
     document.getElementById('age3').value = fila2.children[3].innerHTML
     document.getElementById('email3').value = fila2.children[4].innerHTML
     document.getElementById('username3').value = fila2.children[4].innerHTML
-    document.getElementById('roles3').value = fila2.children[5].innerHTML
+    document.getElementById('roles3').value = fila2.children[6].innerHTML
     $("#modalDelete").modal("show")
 })

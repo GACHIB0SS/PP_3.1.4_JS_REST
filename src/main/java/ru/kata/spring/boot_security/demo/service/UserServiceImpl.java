@@ -36,15 +36,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         userRepository.save(user);
     }
 
-    @Transactional
     @Override
-    public void updateUser(User user) {
-        if (user.getPassword().startsWith("$2a$10$") && user.getPassword().length() == 60) {
-            user.setPassword(user.getPassword());
+    public void updateUser(User userToUpdate) {
+        if (userToUpdate.getPassword().trim().equals("")) {
+            userToUpdate.setPassword(userRepository.findById(userToUpdate.getId()).get().getPassword());
         } else {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userToUpdate.setPassword(passwordEncoder.encode(userToUpdate.getPassword()));
         }
-        userRepository.merge(user);
+        userRepository.save(userToUpdate);
     }
 
     @Override

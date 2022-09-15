@@ -13,11 +13,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/restadmin")
-public class AdminRest {
+public class AdminRestController {
     private final UserService userService;
 
     @Autowired
-    public AdminRest(UserService userService) {
+    public AdminRestController(UserService userService) {
         this.userService = userService;
     }
 
