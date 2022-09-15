@@ -44,6 +44,10 @@ public class Role implements GrantedAuthority {
 
 
     public String toString() {
-        return "Role(id=" + this.getId() + ", name=" + this.getName() + ")";
+        return "Role(id=" +
+                this.getId() +
+                ", name=" +
+                this.getName() +
+                ")";
     }
 }
